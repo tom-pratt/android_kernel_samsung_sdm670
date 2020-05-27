@@ -2793,8 +2793,25 @@ static struct snd_soc_dai_link msm_int_dai[] = {
 		.ignore_pmdown_time = 1,
 		.id = MSM_FRONTEND_DAI_MULTIMEDIA6,
 	},
-#ifdef CONFIG_SEC_SND_ADAPTATION
 	{/* hw:x,40 */
+		.name = "Secondary TDM0 Hostless Playback",
+		.stream_name = "Secondary TDM0 Hostless",
+		.cpu_dai_name = "SEC_TDM_RX_0_HOSTLESS",
+		.platform_name	= "msm-pcm-hostless",
+		.dynamic = 1,
+		.dpcm_playback = 1,
+		.trigger = {SND_SOC_DPCM_TRIGGER_POST,
+			SND_SOC_DPCM_TRIGGER_POST},
+		.no_host_mode = SND_SOC_DAI_LINK_NO_HOST,
+		.ignore_suspend = 1,
+		 /* this dailink has playback support */
+		.ignore_pmdown_time = 1,
+		/* This dainlink has MI2S support */
+		.codec_dai_name = "snd-soc-dummy-dai",
+		.codec_name = "snd-soc-dummy",
+	},
+#ifdef CONFIG_SEC_SND_ADAPTATION
+	{/* hw:x,41 */
 		.name = "ADAPTATION Hostless",
 		.stream_name = "ADAPTATION Hostless",
 		.cpu_dai_name = "snd-soc-dummy-dai",
